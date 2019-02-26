@@ -1,0 +1,49 @@
+/* Merging of K-sorted Linklist
+struct ListNode{                --------------structure of Node
+     int val;
+     ListNode *next;
+   };
+
+struct minvalueNode{
+   bool operator()(ListNode *a, ListNode *b)
+      {
+         return a->val > b->val;
+       }
+};
+
+ListNode mergeList(vector<ListNode*> &A)
+{
+ priority_queue<ListNode*, vector<ListNode*>, minvalueNode> p;
+  for(int i=0;i<A.size();i++)
+  p.push(A[i]);
+  
+  ListNode *head=NULL,*next;
+  while(!p.empty())
+  {
+    ListNode *top=p.top();
+    p.pop();
+    if(top->next)
+    p.push(top->next);
+    if(head==NULL)
+    {
+     head=top;
+     next=head;
+     }
+     else
+     {
+     next->next=top;
+     next=top;
+     }
+}
+return head;
+}
+
+
+
+
+
+
+
+
+
+
